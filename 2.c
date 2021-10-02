@@ -1,31 +1,25 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <math.h>
- /* function declaration */
- void StrCopy(char *str1, char *str2);
- /* main() function */
+ /* 18L04.c: Calling a recursive function */
+ #include <stdio.h>
+ enum con{MIN_NUM = 0,
+          MAX_NUM = 100};
+ int fRecur(int n);
  int main()
  {
-    int numIntegers,i,sum=0;
-    int *ptr;
-    printf("How many bytes?\n");
-    scanf("%d",&numIntegers);
+    int i, sum1, sum2;
 
-    int termination = 0;
+    sum1 = sum2 = 0;
+    for (i=1; i<=MAX_NUM; i++)
+      sum1 += i;
+    printf("The value of sum1 is %d.\n", sum1);
+    sum2 = fRecur(MAX_NUM);
+    printf("The value returned by fRecur() is %d.\n", sum2);
 
-    ptr = malloc(numIntegers * sizeof(int));
-    if (ptr == NULL){
-      printf("malloc() failed.\n");
-      termination = 1;
-    }
-    else{
-      for(i=0;i<numIntegers;i++)
-        ptr[i]=i+1;
-      for (i=0; i<numIntegers; i++)
-        sum += ptr[i];
-      printf("The sum is %d.\n", sum);
-    }
-    free(ptr);
-    return termination;
+    return 0;
+ }
+ /* function definition */
+ int fRecur(int n)
+ {
+    if (n == MIN_NUM)
+      return 0;
+    return  fRecur(n - 1) + n;
  }
