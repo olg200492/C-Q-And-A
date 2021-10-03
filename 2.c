@@ -1,65 +1,23 @@
  /* 19L06.c Using nested structures */
  #include <stdio.h>
- struct department {
-    int  code;
-    char name[32];
-    char position[16];
- };
- typedef struct department DPT;
+struct automobile {
+int year;
+char model[10];
+int engine_power;
+double weight;
+} sedan = {
+  1997,
+  "New Model",
+  200,
+  2345.67};
 
- struct employee {
-    DPT d;
-    int id;
-    char name[32];
- };
-
- typedef struct employee EMPLY;
-
- void InfoDisplay(EMPLY *ptr);
- void InfoEnter(EMPLY *ptr);
-
+typedef struct automobile AUTO;
  int main(void)
  {
-    EMPLY info = {
-       { 1,
-         "Marketing",
-         "Manager"
-       },
-       1,
-       "B. Smith"
-    };
-
-    printf("Here is a sample:\n");
-    InfoDisplay(&info);
-
-    InfoEnter(&info);
-
-    printf("\nHere are what you entered:\n");
-    InfoDisplay(&info);
-
+    printf("%d\n",sedan.year);
+    printf("%s\n",sedan.model);
+    printf("%d\n",sedan.engine_power);
+    printf("%0.2lf\n",sedan.weight);
     return 0;
  }
- /* function definition */
- void InfoDisplay(EMPLY *ptr)
- {
-    printf("Name: %s\n", ptr->name);
-    printf("ID #: %04d\n", ptr->id);
-    printf("Dept. name: %s\n", ptr->d.name);
-    printf("Dept. code: %02d\n", ptr->d.code);
-    printf("Your position: %s\n", ptr->d.position);
- }
- /* function definition */
- void InfoEnter(EMPLY *ptr)
- {
-    printf("\nPlease enter your information:\n");
-    printf("Your name:\n");
-       gets(ptr->name);
-    printf("Your position:\n");
-       gets(ptr->d.position);
-    printf("Dept. name:\n");
-       gets(ptr->d.name);
-    printf("Dept. code:\n");
-       scanf("%d", &(ptr->d.code));
-    printf("Your employee ID #:\n");
-       scanf("%d", &(ptr->id));
- }
+ 
