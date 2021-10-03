@@ -1,48 +1,65 @@
+ /* 19L06.c Using nested structures */
  #include <stdio.h>
- struct haiku {
-    int start_year;
-    int end_year;
-    char author[16];
-    char str1[32];
-    char str2[32];
-    char str3[32];
+ struct department {
+    int  code;
+    char name[32];
+    char position[16];
+ };
+ typedef struct department DPT;
+
+ struct employee {
+    DPT d;
+    int id;
+    char name[32];
  };
 
- typedef struct haiku HK;
+ typedef struct employee EMPLY;
 
- void DataDisplay(HK *ptr_s);
+ void InfoDisplay(EMPLY *ptr);
+ void InfoEnter(EMPLY *ptr);
 
  int main(void)
  {
-    HK poem[2] = {
-      { 1641,
-        1716,
-        "Sodo",
-        "Leading me along",
-        "my shadow goes back home",
-        "from looking at the moon."
-      },
-      { 1729,
-        1781,
-        "Chora",
-        "A storm wind blows",
-        "out from among the grasses",
-        "the full moon grows."
-      }
+    EMPLY info = {
+       { 1,
+         "Marketing",
+         "Manager"
+       },
+       1,
+       "B. Smith"
     };
-    int i;
 
-    for (i=0; i<2; i++)
-       DataDisplay(&poem[i]);
+    printf("Here is a sample:\n");
+    InfoDisplay(&info);
+
+    InfoEnter(&info);
+
+    printf("\nHere are what you entered:\n");
+    InfoDisplay(&info);
 
     return 0;
  }
  /* function definition */
- void DataDisplay(HK *ptr_s)
+ void InfoDisplay(EMPLY *ptr)
  {
-    printf("%s\n", ptr_s->str1);
-    printf("%s\n", ptr_s->str2);
-    printf("%s\n", ptr_s->str3);
-    printf("--- %s\n", ptr_s->author);
-    printf("   (%d-%d)\n\n", ptr_s->start_year, ptr_s->end_year);
+    printf("Name: %s\n", ptr->name);
+    printf("ID #: %04d\n", ptr->id);
+    printf("Dept. name: %s\n", ptr->d.name);
+    printf("Dept. code: %02d\n", ptr->d.code);
+    printf("Your position: %s\n", ptr->d.position);
+ }
+ /* function definition */
+ void InfoEnter(EMPLY *ptr)
+ {
+    printf("\nPlease enter your information:\n");
+    printf("Your name:\n");
+       gets(ptr->name);
+    printf("Your position:\n");
+       gets(ptr->d.position);
+    printf("Dept. name:\n");
+       gets(ptr->d.name);
+    printf("Dept. code:\n");
+       scanf("%d", &(ptr->d.code));
+    printf("Your employee ID #:\n");
+       scanf("%d", &(ptr->id));
  }
