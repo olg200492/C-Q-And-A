@@ -1,25 +1,38 @@
- /* 18L04.c: Calling a recursive function */
  #include <stdio.h>
- enum con{MIN_NUM = 0,
-          MAX_NUM = 100};
- int fRecur(int n);
- int main()
- {
-    int i, sum1, sum2;
+ struct computer {
+    float cost;
+    int year;
+    int cpu_speed;
+    char cpu_type[16];
+ };
+ /* create synonym */
+ typedef struct computer SC;
+ /* function declaration */
+ SC DataReceive(SC s);
 
-    sum1 = sum2 = 0;
-    for (i=1; i<=MAX_NUM; i++)
-      sum1 += i;
-    printf("The value of sum1 is %d.\n", sum1);
-    sum2 = fRecur(MAX_NUM);
-    printf("The value returned by fRecur() is %d.\n", sum2);
+ main(void)
+ {
+    SC model;
+
+    model = DataReceive(model);
+    printf("Here are what you entered:\n");
+    printf("Year: %d\n", model.year);
+    printf("Cost: $%6.2f\n", model.cost);
+    printf("CPU type: %s\n", model.cpu_type);
+    printf("CPU speed: %d MHz\n", model.cpu_speed);
 
     return 0;
  }
  /* function definition */
- int fRecur(int n)
+ SC DataReceive(SC s)
  {
-    if (n == MIN_NUM)
-      return 0;
-    return  fRecur(n - 1) + n;
+    printf("The type of the CPU inside your computer?\n");
+       gets(s.cpu_type);
+    printf("The speed(MHz) of the CPU?\n");
+       scanf("%d", &s.cpu_speed);
+    printf("The year your computer was made?\n");
+       scanf("%d", &s.year);
+    printf("How much you paid for the computer?\n");
+       scanf("%f", &s.cost);
+    return s;
  }
