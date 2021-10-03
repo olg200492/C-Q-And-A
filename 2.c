@@ -1,38 +1,49 @@
- /* 19L04.c Pointing to a structure */
+ /* 19L05.c Arrays of structures */
  #include <stdio.h>
-struct computer {
-   float cost;
-   int year;
-   int cpu_speed;
-   char cpu_type[16];
-};
+ struct haiku {
+    int start_year;
+    int end_year;
+    char author[16];
+    char str1[32];
+    char str2[32];
+    char str3[32];
+ };
 
- typedef struct computer SC;
+ typedef struct haiku HK;
 
- void DataReceive(SC *ptr_s);
+ void DataDisplay(HK *ptr_s);
 
  int main(void)
  {
-    SC model;
-
-    DataReceive(&model);
-    printf("Here are what you entered:\n");
-    printf("Year: %d\n", model.year);
-    printf("Cost: $%6.2f\n", model.cost);
-    printf("CPU type: %s\n", model.cpu_type);
-    printf("CPU speed: %d MHz\n", model.cpu_speed);
-
-    return 0;
+    HK poem[2] = {
+      { 1641,
+        1716,
+        "Sodo",
+        "Leading me along",
+        "my shadow goes back home",
+        "from looking at the moon."
+      },
+      { 1729,
+        1781,
+        "Chora",
+        "A storm wind blows",
+        "out from among the grasses",
+        "the full moon grows."
+      }
+    };
+    /* define an array of pointers with HK */
+  HK *ptr_poem[2] = {&poem[0], &poem[1]};
+  int i;
+  for (i=0; i<2; i++)
+    DataDisplay(ptr_poem[i]);
+  return 0;
  }
  /* function definition */
- void DataReceive(SC *ptr_s)
+ void DataDisplay(HK *ptr_s)
  {
-    printf("The type of the CPU inside your computer?\n");
-       gets(ptr_s->cpu_type);
-    printf("The speed(MHz) of the CPU?\n");
-       scanf("%d", &ptr_s->cpu_speed);
-    printf("The year your computer was made?\n");
-       scanf("%d", &ptr_s->year);
-    printf("How much you paid for the computer?\n");
-       scanf("%f", &ptr_s->cost);
+    printf("%s\n", ptr_s->str1);
+    printf("%s\n", ptr_s->str2);
+    printf("%s\n", ptr_s->str3);
+    printf("--- %s\n", ptr_s->author);
+    printf("   (%d-%d)\n\n", ptr_s->start_year, ptr_s->end_year);
  }
