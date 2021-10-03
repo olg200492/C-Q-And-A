@@ -1,23 +1,24 @@
- /* 19L06.c Using nested structures */
  #include <stdio.h>
-struct automobile {
-int year;
-char model[10];
-int engine_power;
-double weight;
-} sedan = {
-  1997,
-  "New Model",
-  200,
-  2345.67};
-
-typedef struct automobile AUTO;
+ struct employee {
+       int id;
+       char name[32];
+       };
+    /* structure initialization */
+    
+void printStructEmployee(struct employee emp);
  int main(void)
  {
-    printf("%d\n",sedan.year);
-    printf("%s\n",sedan.model);
-    printf("%d\n",sedan.engine_power);
-    printf("%0.2lf\n",sedan.weight);
+    struct employee info = {
+       1,
+       "B. Smith"
+       };
+
+    printStructEmployee(info);
+
     return 0;
  }
- 
+ void printStructEmployee(struct employee emp){
+  printf("Here is a sample:\n");
+  printf("Employee Name: %s\n", emp.name);
+  printf("Employee ID #: %04d\n\n", emp.id);
+ }
